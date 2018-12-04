@@ -11,6 +11,8 @@ public class Controller_ {
     public String index() {
 
         UserModel o = new UserModel();
+        o.getPassword();
+
         return "index";
     }
 }

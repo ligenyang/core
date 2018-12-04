@@ -2,15 +2,13 @@
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
-
 <generatorConfiguration>
-
-    <classPathEntry location="D:/JAVA/maven-repository/.m2/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar" />
+    <!--<classPathEntry location="D:/JAVA/maven-repository/.m2/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar" />-->
     <context id="testTables" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
-        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" userId="LIGENYANG" password="LIGENYANG" />
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521/orclpdb" userId="USER_" password="123456" />
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
@@ -18,23 +16,12 @@
             <property name="enableSubPackages" value="false" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
-        <!-- targetProject:mapper映射文件生成的位置
-           如果maven工程只是单独的一个工程，targetProject="src/main/java"
-           若果maven工程是分模块的工程，targetProject="所属模块的名称"，例如：
-           targetProject="ecps-manager-mapper"，下同-->
-        <sqlMapGenerator targetPackage="com.tom.maventest.mapping"
-                         targetProject="src/main/java">
-            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+        <sqlMapGenerator targetPackage="com.w.core.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
-        <!-- targetPackage：mapper接口生成的位置 -->
-        <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.tom.maventest.mapping"
-                             targetProject="src/main/java">
-            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="classpath:mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
-        <!-- 指定数据库表 -->
-        <table schema="" tableName="use_t"></table>
+        <table schema="" tableName="orcl"></table>
     </context>
 </generatorConfiguration>

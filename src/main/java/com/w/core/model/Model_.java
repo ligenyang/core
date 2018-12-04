@@ -1,39 +1,22 @@
 package com.w.core.model;
 
-import com.w.core.annotation.DefaultValue;
-import org.springframework.util.StringUtils;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.UUID;
+import java.io.Serializable;
 
-public class Model_ {
+public class Model_ implements Serializable {
 
+    @Getter
+    @Setter
     private String id;
 
+    @Getter
+    @Setter
     private String code;
 
+    @Getter
+    @Setter
     private String name;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
