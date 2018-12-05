@@ -10,16 +10,18 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "user")
+@RequestMapping("user")
 public class UserController {
 
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "select")
+    @RequestMapping("select")
     public String select(Model model) {
-        List<User> userModels = userService.select();
-        return "index";
+        List<User> users = userService.select();
+
+        model.addAttribute("users", users);
+        return "user/user";
     }
 
 }

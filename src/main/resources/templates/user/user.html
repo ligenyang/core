@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>String</title>
+</head>
+<body>
+<div style="height: 200px; width: 100%; background-color: aliceblue; text-align: center;">
+    <div>
+        <input type="button" value="新增">
+    </div>
+    <table style="border: 1px solid aqua; width: 100%; text-align: center;">
+        <thead>
+        <tr>
+            <th style="width: 100px;">用户ID</th>
+            <th style="width: 100px;">用户编码</th>
+            <th style="width: 100px;">用户名称</th>
+            <th style="width: 100px;">用户密码</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.code}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.password}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <form>
+        <table>
+            <tbody>
+            <tr>
+                <td>编码</td>
+                <td><input type="text" maxlength="10" placeholder="请输入编码"></td>
+            </tr>
+            <tr>
+                <td>名称</td>
+                <td><input type="text" maxlength="10" placeholder="请输入编码"></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input type="text" maxlength="10" placeholder="请输入编码"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+
+</script>
