@@ -1,7 +1,4 @@
 package com.w.core.service;
 
-public class Service_ {
-
-
-
+public class CoreService {
 }

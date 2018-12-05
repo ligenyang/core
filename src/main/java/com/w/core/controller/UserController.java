@@ -1,6 +1,6 @@
 package com.w.core.controller;
 
-import com.w.core.model.UserModel;
+import com.w.core.model.User;
 import com.w.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class UserController {
 
     @RequestMapping(value = "/select")
     public String select(Model model) {
-        List<UserModel> userModels = userService.select();
+        List<User> userModels = userService.select();
         return "index";
     }
 
