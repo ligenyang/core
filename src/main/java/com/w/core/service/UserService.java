@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService extends CoreService<User, UserDao> {
 
     @Resource
     private UserDao userDao;

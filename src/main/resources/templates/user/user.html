@@ -2,32 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>String</title>
+    <title>CORE</title>
 </head>
 <body>
-<div style="height: 200px; width: 100%; background-color: aliceblue; text-align: center;">
-    <div>
-        <input type="button" value="新增" id="button">
-    </div>
-    <table style="border: 1px solid aqua; width: 100%; text-align: center;">
-        <thead>
-        <tr>
-            <th style="width: 100px;">用户ID</th>
-            <th style="width: 100px;">用户编码</th>
-            <th style="width: 100px;">用户名称</th>
-            <th style="width: 100px;">用户密码</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.code}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.password}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 <div style="background: darkslateblue; box-shadow: 0 0 1px #0a0888; height: 50px; width: 100%; text-align: center;">
     <input type="button" value="新增" style="height: 100%; font-size: 16px;" id="new">
     <input type="button" value="编辑" style="height: 100%; font-size: 16px;">
@@ -57,40 +34,29 @@
 </html>
 <script type="text/javascript">
 
+    function $(id) {
+        var c = id.charAt(0);
+        if('#' === c) {
+            return document.getElementById(id.replace('#', ''));
+        }
+    }
+
     document.getElementsByName('codeNamw')[0].addEventListener('click', myfunc);
     function myfunc(){
         alert('ok')
     }
 
-    var t = document.getElementsByName('password');
+    /*var t = document.getElementsByName('password');
     for(var i = 0; i < t.length; i++) {
         t[i].onclick = function (ev) {
             alert('pass');
         }
-    }
-
-
-    document.getElementById('new').onclick = function (e) {
+    }*/
+    var Tags = document.getElementsByTagName('*');
+    for(var i = 0; i < Tags.length; i ++) {
         debugger;
-        var a = this;
-        var b = e;
-    };
-
-    /*document.getElementsByName('password').forEach(function (value) {
-       debugger;
-       this.width = '200px';
-       this.onclick = function() {
-           debugger;
-           alert(1);
-       }
-       alert(value);
-       alert(this.value);
-    });*/
-
-    function $(id) {
-        var c = id.charAt(0);
-        if('#' === c) {
-            return document.getElementById(id.replace('#', ''));
+        if(Tags[i].name === 'password') {
+            alert('pass');
         }
     }
     window.onload = function (ev) {

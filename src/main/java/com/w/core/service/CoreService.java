@@ -1,4 +1,8 @@
 package com.w.core.service;
 
-public class CoreService {
+import com.w.core.dao.CoreDao;
+import com.w.core.model.Core;
+
+public class CoreService<E extends Core, S extends CoreDao> {
+
 }

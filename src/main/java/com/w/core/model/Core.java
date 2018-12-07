@@ -3,9 +3,7 @@ package com.w.core.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
-
-public class Core implements Serializable {
+public class Core {
 
     @Getter
     @Setter

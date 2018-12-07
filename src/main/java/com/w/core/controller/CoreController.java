@@ -1,15 +1,9 @@
 package com.w.core.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.w.core.model.Core;
+import com.w.core.service.CoreService;
 
-@Controller
-public class CoreController<E, S> {
+public class CoreController<E extends Core, S extends CoreService> {
 
 
-    @RequestMapping("{core}")
-    public String core(@PathVariable String core) {
-        return core;
-    }
 }

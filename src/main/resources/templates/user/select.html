@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>CORE</title>
+</head>
+<body>
+<div style="background: darkslateblue; box-shadow: 0 0 1px #0a0888; height: 50px; width: 100%; text-align: center;">
+    <input type="button" value="新增" style="height: 100%; font-size: 16px;" id="new">
+    <input type="button" value="编辑" style="height: 100%; font-size: 16px;">
+</div>
+<div style="background-color: aliceblue; width: 100%;">
+    <form>
+        <table>
+            <tbody>
+            <tr>
+                <td>编码</td>
+                <td><input type="text" maxlength="10" name="codeNamw" placeholder="请输入编码"></td>
+            </tr>
+            <tr>
+                <td>名称</td>
+                <td><input type="text" maxlength="10" name="name" placeholder="请输入编码"></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input type="text" maxlength="10" name="password" placeholder="请输入编码"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<div style="background-color: lemonchiffon; height: 100%; width: 100%; position: fixed; top: 0; left: 0; z-index: 1; opacity: 0.5; display: none;"><!--遮罩层--></div>
+</body>
+</html>
+<script type="text/javascript">
+
+    var xhr;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    window.onload = function (ev) {
+
+        function $(id) {
+            var c = id.charAt(0);
+            if('#' === c) {
+                return document.getElementById(id.replace('#', ''));
+            }
+            if('.' === c) {
+                return document.getElementsByClassName(id.replace('.', ''));
+            }
+            if('+' === c) {
+                return document.getElementsByName(id.replace('+', ''));
+            }
+        }
+
+        var Tags = document.getElementsByTagName('*');
+        for(var i = 0; i < Tags.length; i ++) {
+            if(Tags[i].name === 'password') {
+                Tags[i].addEventListener('click', func);
+            }
+        }
+
+        function func() {
+            alert('ok')
+        }
+
+        $('+name').forEach(function(o) {
+            o.onclick = function (e) {
+                debugger;
+
+                var request = new XMLHttpRequest();
+                request.open("GET", "/user/core", true);
+                request.send();
+                request.onreadystatechange = function () {
+                    debugger;
+                    if (request.readyState === 4) {
+                        if (request.status === 200) {
+                            return request.responseText;
+                        } else {
+                            return request.status;
+                        }
+                    } else {
+
+                    }
+                };
+                alert(request.responseText);
+            }
+        });
+
+
+    }
+
+</script>
