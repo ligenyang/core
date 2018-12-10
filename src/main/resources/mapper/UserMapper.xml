@@ -4,7 +4,45 @@
     <resultMap id="user" type="com.w.core.model.User"/>
     <parameterMap id="user" type="com.w.core.model.User"/>
 
-    <select id="select" resultMap="user">
-        <![CDATA[ SELECT T.ID, T.CODE, T.NAME, T.PASSWORD FROM USER_ T ]]>
+    <resultMap id="user2" type="com.w.core.model.User" >
+        <id column="ID" property="id" jdbcType="VARCHAR" />
+        <result column="CODE" property="code" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <select id="select" resultMap="user" parameterType="com.w.core.model.User">
+        <![CDATA[ SELECT T.ID, T.CODE, T.NAME, T.PASSWORD FROM USER_ T WHERE 1 = 1 ]]>
+        <if test="code != null"><![CDATA[ AND T.CODE = #{CODE} ]]></if>
     </select>
+
+    <insert id="insert" parameterType="com.w.core.model.User" >
+        <![CDATA[ insert into user_ (id, code, name, password)
+        values (#{id, jdbcType=VARCHAR}, #{code, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}) ]]>
+    </insert>
+
+    <update id="update" parameterType="com.w.core.model.User" >
+        update user_ t
+        <set>
+            <if test="code != null">
+                t.code = #{code, jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                t.name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                t.password = #{password, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where t.id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <update id="updateAll" parameterType="com.w.core.model.User" >
+        update user_ t
+        set t.code = #{code, jdbcType=VARCHAR},
+            t.name = #{name, jdbcType=VARCHAR},
+            t.password = #{password, jdbcType=VARCHAR}
+        where t.id = #{id, jdbcType=INTEGER}
+    </update>
 </mapper>

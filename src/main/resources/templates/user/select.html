@@ -8,22 +8,24 @@
 <div style="background: darkslateblue; box-shadow: 0 0 1px #0a0888; height: 50px; width: 100%; text-align: center;">
     <input type="button" value="新增" style="height: 100%; font-size: 16px;" id="new">
     <input type="button" value="编辑" style="height: 100%; font-size: 16px;">
+    <input type="button" value="保存" class="submit" style="height: 100%; font-size: 16px;">
 </div>
 <div style="background-color: aliceblue; width: 100%;">
-    <form>
+    <form th:action="@{/user/insert}" th:object="${user}" method="POST">
+        <input type="submit" value="保存" style="font-size: 16px;">
         <table>
             <tbody>
             <tr>
                 <td>编码</td>
-                <td><input type="text" maxlength="10" name="codeNamw" placeholder="请输入编码"></td>
+                <td><input type="text" maxlength="10" th:field="*{code}" placeholder="请输入编码"></td>
             </tr>
             <tr>
                 <td>名称</td>
-                <td><input type="text" maxlength="10" name="name" placeholder="请输入编码"></td>
+                <td><input type="text" maxlength="10" th:field="*{name}" placeholder="请输入编码"></td>
             </tr>
             <tr>
                 <td>密码</td>
-                <td><input type="text" maxlength="10" name="password" placeholder="请输入编码"></td>
+                <td><input type="text" maxlength="10" th:field="*{password}" placeholder="请输入编码"></td>
             </tr>
             </tbody>
         </table>
@@ -64,7 +66,7 @@
         }
 
         function func() {
-            alert('ok')
+            //alert('ok')
         }
 
         $('+name').forEach(function(o) {
@@ -75,7 +77,6 @@
                 request.open("GET", "/user/core", true);
                 request.send();
                 request.onreadystatechange = function () {
-                    debugger;
                     if (request.readyState === 4) {
                         if (request.status === 200) {
                             return request.responseText;
@@ -86,7 +87,7 @@
 
                     }
                 };
-                alert(request.responseText);
+                //alert(request.responseText);
             }
         });
 
