@@ -5,33 +5,42 @@
     <title>CORE</title>
 </head>
 <body>
-<div style="background: darkslateblue; box-shadow: 0 0 1px #0a0888; height: 50px; width: 100%; text-align: center;">
-    <input type="button" value="新增" style="height: 100%; font-size: 16px;" id="new">
-    <input type="button" value="编辑" style="height: 100%; font-size: 16px;">
-    <input type="button" value="保存" class="submit" style="height: 100%; font-size: 16px;">
+<div>
+    <div style="background-color: antiquewhite; float: left; height: 1000px; width: 20%;">
+        <ul th:each="entity: ${userList}">
+            <li th:name="${entity.id}" th:onclick="|javascript:main_(this)|" th:text="${entity.name}" style="cursor: pointer;"></li>
+        </ul>
+    </div>
+    <div style="background-color: aqua; float: left; height: 100px; width: 80%;">
+        <input type="button" value="新增" style="height: 50px; font-size: 16px;" id="new">
+        <input type="button" value="编辑" style="height: 50px; font-size: 16px;">
+        <input type="button" value="保存" class="submit" style="height: 50px; font-size: 16px;">
+    </div>
+    <div id="main-content" style="background-color: burlywood; float: left; height: 900px; width: 80%;">
+        <form th:action="@{/user/insert}" th:object="${user}" method="POST">
+            <input type="submit" value="保存" style="font-size: 16px;">
+            <table>
+                <tbody>
+                <tr>
+                    <td>编码</td>
+                    <td><input type="text" maxlength="10" th:field="*{code}" placeholder="请输入编码"></td>
+                </tr>
+                <tr>
+                    <td>名称</td>
+                    <td><input type="text" maxlength="10" th:field="*{name}" placeholder="请输入编码"></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td><input type="text" maxlength="10" th:field="*{password}" placeholder="请输入编码"></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
 </div>
-<div style="background-color: aliceblue; width: 100%;">
-    <form th:action="@{/user/insert}" th:object="${user}" method="POST">
-        <input type="submit" value="保存" style="font-size: 16px;">
-        <table>
-            <tbody>
-            <tr>
-                <td>编码</td>
-                <td><input type="text" maxlength="10" th:field="*{code}" placeholder="请输入编码"></td>
-            </tr>
-            <tr>
-                <td>名称</td>
-                <td><input type="text" maxlength="10" th:field="*{name}" placeholder="请输入编码"></td>
-            </tr>
-            <tr>
-                <td>密码</td>
-                <td><input type="text" maxlength="10" th:field="*{password}" placeholder="请输入编码"></td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
+<div id="mask" style="background-color: lemonchiffon; height: 100%; width: 100%; position: fixed; top: 0; left: 0; z-index: 1; opacity: 0.5; display: none;">
+
 </div>
-<div style="background-color: lemonchiffon; height: 100%; width: 100%; position: fixed; top: 0; left: 0; z-index: 1; opacity: 0.5; display: none;"><!--遮罩层--></div>
 </body>
 </html>
 <script type="text/javascript">
@@ -43,20 +52,20 @@
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    window.onload = function (ev) {
-
-        function $(id) {
-            var c = id.charAt(0);
-            if('#' === c) {
-                return document.getElementById(id.replace('#', ''));
-            }
-            if('.' === c) {
-                return document.getElementsByClassName(id.replace('.', ''));
-            }
-            if('+' === c) {
-                return document.getElementsByName(id.replace('+', ''));
-            }
+    function $(id) {
+        var c = id.charAt(0);
+        if('#' === c) {
+            return document.getElementById(id.replace('#', ''));
         }
+        if('.' === c) {
+            return document.getElementsByClassName(id.replace('.', ''));
+        }
+        if('+' === c) {
+            return document.getElementsByName(id.replace('+', ''));
+        }
+    }
+
+    window.onload = function (ev) {
 
         var Tags = document.getElementsByTagName('*');
         for(var i = 0; i < Tags.length; i ++) {
@@ -92,6 +101,35 @@
         });
 
 
+    };
+
+    function main_(o) {
+        openMask();
+        debugger;
+        var v = o.getAttribute('name');
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/user/get?id=' + v, true);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    debugger;
+                    $('#main-content').innerHTML = xhr.responseText;
+                    closeMask();
+                } else {
+
+                }
+            } else {
+
+            }
+        };
+    }
+
+    function openMask() {
+        $('#mask').style.display = 'block';
+    }
+    function closeMask() {
+        $('#mask').style.display = 'none';
     }
 
 </script>

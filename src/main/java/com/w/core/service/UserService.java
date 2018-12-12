@@ -34,4 +34,8 @@ public class UserService extends CoreService<User, UserDao> {
         userDao.insert(user);
     }
 
+    public User get(String id) {
+        return userDao.get(id);
+    }
+
 }

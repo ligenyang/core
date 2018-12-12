@@ -14,4 +14,6 @@ public interface CoreDao<E extends Core> {
     void update(User user);
 
     void updateAll(User user);
+
+    E get(String id);
 }

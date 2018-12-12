@@ -58,4 +58,11 @@ public class UserController extends CoreController<User, UserService> {
         return "core";
     }
 
+    @RequestMapping(value = "get", method = RequestMethod.GET)
+    @ResponseBody
+    public User get(String id) {
+
+        return userService.get(id);
+    }
+
 }
