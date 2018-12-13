@@ -1,36 +1,135 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>String</title>
+    <title>CORE</title>
 </head>
 <body>
-圣达菲SD睡都
-<!--<div style="height: 200px; width: 100%; background-color: aliceblue; text-align: center;">
-    <div>
-        <input type="button" value="新增" id="button">
+<div>
+    <div style="background-color: antiquewhite; float: left; height: 1000px; width: 20%;">
+        <ul th:each="entity: ${resourceList}">
+            <li th:name="${entity.id}" th:onclick="|javascript:main_(this)|" th:text="${entity.name}" style="cursor: pointer;"></li>
+        </ul>
     </div>
-    <table style="border: 1px solid aqua; width: 100%; text-align: center;">
-        <thead>
-        <tr>
-            <th style="width: 100px;">用户ID</th>
-            <th style="width: 100px;">用户编码</th>
-            <th style="width: 100px;">用户名称</th>
-            <th style="width: 100px;">用户密码</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.code}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.password}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>-->
+    <div style="background-color: aqua; float: left; height: 100px; width: 80%;">
+        <input type="button" value="新增" style="height: 50px; font-size: 16px;" id="new">
+        <input type="button" value="编辑" style="height: 50px; font-size: 16px;">
+        <input type="button" value="保存" class="submit" style="height: 50px; font-size: 16px;">
+    </div>
+    <div id="main-content" style="background-color: burlywood; float: left; height: 900px; width: 80%;">
+        <!--<form th:action="@{/user/insert}" th:object="${user}" method="POST">
+            <input type="submit" value="保存" style="font-size: 16px;">
+            <table>
+                <tbody>
+                <tr>
+                    <td>编码</td>
+                    <td><input type="text" maxlength="10" th:field="*{code}" placeholder="请输入编码"></td>
+                </tr>
+                <tr>
+                    <td>名称</td>
+                    <td><input type="text" maxlength="10" th:field="*{name}" placeholder="请输入编码"></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td><input type="text" maxlength="10" th:field="*{password}" placeholder="请输入编码"></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>-->
+    </div>
+</div>
+<div id="mask" style="background-color: lemonchiffon; height: 100%; width: 100%; position: fixed; top: 0; left: 0; z-index: 1; opacity: 0.5; display: none;">
+
+</div>
 </body>
 </html>
 <script type="text/javascript">
+
+    var xhr;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    function $(id) {
+        var c = id.charAt(0);
+        if('#' === c) {
+            return document.getElementById(id.replace('#', ''));
+        }
+        if('.' === c) {
+            return document.getElementsByClassName(id.replace('.', ''));
+        }
+        if('+' === c) {
+            return document.getElementsByName(id.replace('+', ''));
+        }
+    }
+
+    window.onload = function (ev) {
+
+        var Tags = document.getElementsByTagName('*');
+        for(var i = 0; i < Tags.length; i ++) {
+            if(Tags[i].name === 'password') {
+                Tags[i].addEventListener('click', func);
+            }
+        }
+
+        function func() {
+            //alert('ok')
+        }
+
+        $('+name').forEach(function(o) {
+            o.onclick = function (e) {
+                debugger;
+
+                var request = new XMLHttpRequest();
+                request.open("GET", "/user/core", true);
+                request.send();
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4) {
+                        if (request.status === 200) {
+                            return request.responseText;
+                        } else {
+                            return request.status;
+                        }
+                    } else {
+
+                    }
+                };
+                //alert(request.responseText);
+            }
+        });
+
+
+    };
+
+    function main_(o) {
+        openMask();
+        debugger;
+        var v = o.getAttribute('name');
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/user/get?id=' + v, true);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    debugger;
+                    $('#main-content').innerHTML = xhr.responseText;
+                    closeMask();
+                } else {
+
+                }
+            } else {
+
+            }
+        };
+    }
+
+    function openMask() {
+        $('#mask').style.display = 'block';
+    }
+    function closeMask() {
+        $('#mask').style.display = 'none';
+    }
 
 </script>

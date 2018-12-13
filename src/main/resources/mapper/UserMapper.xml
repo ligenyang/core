@@ -8,23 +8,25 @@
         <id column="ID" property="id" jdbcType="VARCHAR" />
         <result column="CODE" property="code" jdbcType="VARCHAR" />
         <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="USERNAME" property="username" jdbcType="VARCHAR" />
         <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="get" resultMap="user" parameterType="java.lang.String">
         <![CDATA[
-        SELECT T.ID, T.CODE, T.NAME, T.PASSWORD FROM USER_ T WHERE T.ID = #{id}
+        SELECT T.ID, T.CODE, T.NAME, T.USERNAME, T.PASSWORD FROM USER_ T
+        WHERE T.ID = #{id, jdbcType=VARCHAR} OR T.CODE = #{id, jdbcType=VARCHAR} OR T.NAME = #{id, jdbcType=VARCHAR} OR T.USERNAME = #{id, jdbcType=VARCHAR}
         ]]>
     </select>
 
     <select id="select" resultMap="user" parameterType="com.w.core.model.User">
-        <![CDATA[ SELECT T.ID, T.CODE, T.NAME, T.PASSWORD FROM USER_ T WHERE 1 = 1 ]]>
+        <![CDATA[ SELECT T.ID, T.CODE, T.NAME, T.USERNAME, T.PASSWORD FROM USER_ T WHERE 1 = 1 ]]>
         <if test="code != null"><![CDATA[ AND T.CODE = #{CODE} ]]></if>
     </select>
 
     <insert id="insert" parameterType="com.w.core.model.User" >
-        <![CDATA[ insert into user_ (id, code, name, password)
-        values (#{id, jdbcType=VARCHAR}, #{code, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}) ]]>
+        <![CDATA[ insert into user_ (id, code, name, username, password)
+        values (#{id, jdbcType=VARCHAR}, #{code, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}) ]]>
     </insert>
 
     <update id="update" parameterType="com.w.core.model.User" >
@@ -35,6 +37,9 @@
             </if>
             <if test="name != null">
                 t.name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                t.username = #{username, jdbcType=VARCHAR},
             </if>
             <if test="password != null">
                 t.password = #{password, jdbcType=VARCHAR},
@@ -47,6 +52,7 @@
         update user_ t
         set t.code = #{code, jdbcType=VARCHAR},
             t.name = #{name, jdbcType=VARCHAR},
+            t.username = #{username, jdbcType=VARCHAR}
             t.password = #{password, jdbcType=VARCHAR}
         where t.id = #{id, jdbcType=INTEGER}
     </update>

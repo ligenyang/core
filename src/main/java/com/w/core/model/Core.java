@@ -1,9 +1,8 @@
 package com.w.core.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.io.Serializable;
 
-public class Core {
+public class Core implements Serializable {
 
     private String id;
 

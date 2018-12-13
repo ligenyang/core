@@ -1,19 +1,20 @@
 package com.w.core.dao;
 
 import com.w.core.model.Core;
-import com.w.core.model.User;
+import com.w.core.model.Resource;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CoreDao<E extends Core> {
 
-    List<E> select();
+    List<E> select(Map map);
 
-    void insert(User user);
+    void insert(E entity);
 
-    void update(User user);
+    void update(E entity);
 
-    void updateAll(User user);
+    void updateAll(E entity);
 
     E get(String id);
 }

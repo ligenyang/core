@@ -1,4 +1,4 @@
 package com.w.core.model;
 
-public class Resource {
+public class Resource extends Core {
 }

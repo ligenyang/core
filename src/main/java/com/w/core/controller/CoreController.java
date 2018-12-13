@@ -3,6 +3,7 @@ package com.w.core.controller;
 import com.w.core.model.Core;
 import com.w.core.service.CoreService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,7 +15,7 @@ public class CoreController<E extends Core, S extends CoreService> {
     }
 
     @RequestMapping("index")
-    public String index() {
+    public String index(Model model) {
         return "index";
     }
 
