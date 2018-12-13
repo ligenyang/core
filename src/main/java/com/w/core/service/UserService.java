@@ -3,10 +3,6 @@ package com.w.core.service;
 import com.w.core.Util;
 import com.w.core.dao.UserDao;
 import com.w.core.model.User;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserService extends CoreService<User, UserDao> implements UserDetailsService {
+public class UserService extends CoreService<User, UserDao> {
 
     @Resource
     private UserDao userDao;
@@ -41,10 +37,4 @@ public class UserService extends CoreService<User, UserDao> implements UserDetai
         return userDao.get(id);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = new User(s, "123456",
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-        return user;
-    }
 }

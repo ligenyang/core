@@ -8,19 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CoreController<E extends Core, S extends CoreService> {
 
-    /**
-     * /templates/login.html
-     */
     @RequestMapping("login")
-    public String hello() {
+    public String login(String username, String password) {
         return "login";
     }
 
-    /**
-     * /templates/index.html
-     */
-    @RequestMapping("success")
-    public String success() {
+    @RequestMapping("index")
+    public String index() {
         return "index";
     }
 
