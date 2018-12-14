@@ -1,9 +1,7 @@
 package com.w.core;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,18 +19,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated()
+
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .failureUrl("/login?error")
                 .defaultSuccessUrl("/index")
+                .failureUrl("/login?error")
+                .permitAll()
+
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
                 .permitAll();
-        //http.passwordEncoder(new BCryptPasswordEncoder());
-        http .csrf().disable();
+
+        http .csrf().disable(); // Cross-site request forgery 跨站请求伪造
 
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
