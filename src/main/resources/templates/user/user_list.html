@@ -5,8 +5,32 @@
     <title>Title</title>
 </head>
 <body>
-<div th:each="entity: ${userList}">
-
+<div>
+    <input type="button" value="新增" style="height: 50px; font-size: 16px;">
+</div>
+<div id="user-content">
+    <form th:action="@{/user/list}" th:object="${user}" method="POST">
+        <table style="border: 1px solid white;">
+            <thead>
+            <tr>
+                <td style="width: 100px;">ID</td>
+                <td style="width: 100px;">编码</td>
+                <td style="width: 100px;">名称</td>
+                <td style="width: 100px;">用户名</td>
+                <td style="width: 100px;">密码</td>
+            </tr>
+            </thead>
+            <tbody th:each="entity: ${userList}">
+            <tr>
+                <td th:text="${entity.id}"></td>
+                <td th:text="${entity.code}"></td>
+                <td th:text="${entity.name}"></td>
+                <td th:text="${entity.username}"></td>
+                <td th:text="${entity.password}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 </div>
 </body>
 </html>

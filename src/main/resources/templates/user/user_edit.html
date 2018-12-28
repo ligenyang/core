@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <input type="button" value="新增" style="height: 50px; font-size: 16px;">
+</div>
+<div>
+    <form th:action="@{/user/insert}" th:object="${user}" method="POST">
+        <input type="submit" value="保存" style="font-size: 16px;">
+        <table>
+            <tbody>
+            <tr>
+                <td>编码</td>
+                <td><input type="text" maxlength="10" th:field="*{code}" placeholder="请输入编码"></td>
+            </tr>
+            <tr>
+                <td>名称</td>
+                <td><input type="text" maxlength="10" th:field="*{name}" placeholder="请输入编码"></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input type="text" maxlength="10" th:field="*{password}" placeholder="请输入编码"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    function main_(o) {
+        openMask();
+        var v = o.getAttribute('name');
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/user/list', true);
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    $('#main-content').innerHTML = xhr.responseText;
+                    $('#navigation').innerHTML += '<span>用户管理</span>';
+                } else {
+
+                }
+                closeMask();
+            }
+        };
+    }
+</script>
+</html>

@@ -21,7 +21,7 @@ public class UserService extends CoreService<User> implements UserDetailsService
 
     @Override
     protected CoreDao<User> getDao() {
-        return this.getDao();
+        return this.userDao;
     }
 
     @Override
