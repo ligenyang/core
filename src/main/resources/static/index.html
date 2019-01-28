@@ -3,11 +3,37 @@
 <head>
     <meta charset="utf-8">
     <title>String</title>
+    <script src="/core/src/main/resources/static/js/jquery-3.3.1.js"></script>
 </head>
 <body>
-12312312
+<div id="data-attribu" data-attribu="Attribute Value asfdsafdferv"><!--自定义属性-->
+
+</div>
+<label>
+    <select name="select" id="select">
+        <option value="43242" data-value="123">asd</option>
+        <option value="43532" data-value="890">qwe</option>
+    </select>
+</label>
 </body>
 </html>
+
 <script type="text/javascript">
+    var JsonStringToObject = { // 字符串 string 转 对象 object
+        message: 'Json String Parse to Object',
+        toObject: function(str) {
+            var obj = null;
+            try {
+                obj = (new Function('return '+ str))();
+            } catch (e) {
+                obj = str;
+                console.error('Json String toObject：Parse "String" to "Object" error! Your str is: '+ str)
+            }
+            return obj;
+        }
+    };
+
+    var el = document.getElementById("data-attribu"); // 自定义属性
+    console.log(el.dataset.attribu);
 
 </script>

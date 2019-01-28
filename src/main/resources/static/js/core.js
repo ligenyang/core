@@ -30,3 +30,19 @@ var Ajax = function (url, method, async) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/user/list', true);
 };
+
+//var obj = (new Function('return '+ this))()
+
+var Obj = {
+    obj: 'Object',
+    toObj: function() { // Json字符串转Object对象
+        var o = null;
+        try {
+            o = (new Function('return '+ this))();
+        } catch (e) {
+            obj = this;
+            console.debug('String toObj：Parse "String" to "Object" error! Your str is: '+ this)
+        }
+        return o;
+    }
+};

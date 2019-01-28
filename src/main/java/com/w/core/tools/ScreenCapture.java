@@ -68,7 +68,7 @@ public class ScreenCapture extends JFrame implements ActionListener {
         this.setSize(500,400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.setAlwaysOnTop(true);
+        this.setAlwaysOnTop(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -208,24 +208,24 @@ public class ScreenCapture extends JFrame implements ActionListener {
         System.gc();
     }
 
-    public void actionPerformed(ActionEvent ae){
-        Object source=ae.getSource();
-        if(source==jButtonStart){
+    public void actionPerformed(ActionEvent actionEvent) {
+        Object source = actionEvent.getSource();
+        if(source == jButtonStart) {
             doStart();
-        } else if(source==jButtonCancel){
+        } else if(source == jButtonCancel) {
             System.exit(0);
-        }else if(source==jRadioButtonJava){ // 金属外观
-            try{
+        }else if(source == jRadioButtonJava) { // 金属外观
+            try {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
                 SwingUtilities.updateComponentTreeUI(this);
-            }catch(Exception exe){
+            } catch(Exception exe) {
                 exe.printStackTrace();
             }
-        }else if(source==jRadioButtonSystem){ // 本地外观
-            try{
+        } else if(source==jRadioButtonSystem) { // 本地外观
+            try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 SwingUtilities.updateComponentTreeUI(this);
-            }catch(Exception exe){
+            } catch(Exception exe) {
                 exe.printStackTrace();
             }
         }
