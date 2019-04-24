@@ -1,0 +1,5 @@
+1. Julia 是面向科学计算的高性能动态高级程序设计语言
+2. 官方网站 https://julialang.org/
+3. 中国社区 https://juliacn.com/
+4. GitHub https://github.com/JuliaLang/julia
+5. IDE https://juliacomputing.com/products/juliapro.html
